@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardPile" load_steps=5 format=3 uid="uid://7mryqhao0uab"]
+
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_lskng"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_d31u6"]
+[ext_resource type="Resource" uid="uid://defc4ojtijyek" path="res://cards/rum.tres" id="2_va1kv"]
+[ext_resource type="Resource" uid="uid://cytxhm28bmjxt" path="res://cards/rusty_cutlass.tres" id="3_vmaym"]
+
+[resource]
+script = ExtResource("2_d31u6")
+cards = Array[ExtResource("1_lskng")]([ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("2_va1kv"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym"), ExtResource("3_vmaym")])

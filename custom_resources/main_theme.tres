@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b3eypke120vg0"]
+
+[ext_resource type="StyleBox" uid="uid://clnh2f0h5tp2j" path="res://scenes/card_ui/card_hover_stylebox.tres" id="1_j3qmw"]
+[ext_resource type="FontFile" uid="uid://j5riluhtyips" path="res://assets/fonts/Montserrat/static/Montserrat-Regular.ttf" id="1_qi6v4"]
+[ext_resource type="StyleBox" uid="uid://c11i8rvjl6aff" path="res://scenes/card_ui/card_base_stylebox.tres" id="1_u0qay"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxvx0"]
+bg_color = Color(0.501961, 0.396078, 0.360784, 0.588235)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.278431, 0.203922, 0.188235, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8wsns"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1et3b"]
+bg_color = Color(0.501851, 0.397156, 0.359127, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.462291, 0.35191, 0.328618, 1)
+
+[resource]
+default_font = ExtResource("1_qi6v4")
+default_font_size = 18
+Button/styles/disabled = SubResource("StyleBoxFlat_wxvx0")
+Button/styles/focus = SubResource("StyleBoxEmpty_8wsns")
+Button/styles/hover = ExtResource("1_j3qmw")
+Button/styles/normal = ExtResource("1_u0qay")
+Button/styles/pressed = SubResource("StyleBoxFlat_1et3b")
+PanelContainer/styles/panel = ExtResource("1_u0qay")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://m08dt3wioi2k"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_qlsw1"]
+[ext_resource type="Resource" uid="uid://c2vsxi2soqj3n" path="res://custom_resources/player.tres" id="2_2dtm6"]
+[ext_resource type="Texture2D" uid="uid://74mlavv8kp20" path="res://assets/graphics/pirate portrait.jpg" id="2_ltf6i"]
+[ext_resource type="PackedScene" uid="uid://e6tdfuhgbnfu" path="res://scenes/ui/stats_ui.tscn" id="2_mnrdg"]
+
+[node name="Player" type="Node2D" groups=["player"]]
+script = ExtResource("1_qlsw1")
+stats = ExtResource("2_2dtm6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, 125)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ltf6i")
+
+[node name="StatsUI" parent="." instance=ExtResource("2_mnrdg")]
+offset_left = -79.0
+offset_top = -40.0
+offset_right = 503.0
+offset_bottom = 115.0
+scale = Vector2(0.3, 0.3)

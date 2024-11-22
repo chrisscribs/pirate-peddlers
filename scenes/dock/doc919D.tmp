@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://doxa2mi40nuly"]
+
+[ext_resource type="Script" path="res://scenes/dock/dock.gd" id="1_c78t2"]
+[ext_resource type="Texture2D" uid="uid://bvadsp6atli4t" path="res://assets/graphics/Pointer.png" id="1_dens1"]
+[ext_resource type="PackedScene" uid="uid://e6tdfuhgbnfu" path="res://scenes/ui/stats_ui.tscn" id="2_rr5fu"]
+[ext_resource type="Resource" uid="uid://dk3u0fxftvflc" path="res://docks/test_dock.tres" id="2_y5l50"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_od5pb"]
+size = Vector2(184, 316)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53i47"]
+atlas = ExtResource("1_dens1")
+region = Rect2(2, 9, 19, 14)
+
+[node name="Dock" type="Area2D" groups=["docks"]]
+position = Vector2(-3, -2)
+collision_layer = 4
+script = ExtResource("1_c78t2")
+stats = ExtResource("2_y5l50")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_od5pb")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(99, 8)
+rotation = 3.14159
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_53i47")
+
+[node name="StatsUI" parent="." instance=ExtResource("2_rr5fu")]
+offset_left = -69.0
+offset_top = -162.0
+offset_right = 513.0
+offset_bottom = -7.0
+scale = Vector2(0.25, 0.25)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

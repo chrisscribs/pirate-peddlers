@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://dk3u0fxftvflc"]
+
+[ext_resource type="Script" path="res://custom_resources/stats.gd" id="1_b2xx1"]
+
+[resource]
+script = ExtResource("1_b2xx1")
+starting_gold = 0
+max_gold = 999
+starting_modifier = 0
+max_modifier = 999

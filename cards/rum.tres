@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://defc4ojtijyek"]
+
+[ext_resource type="Script" path="res://cards/rum.gd" id="1_jrt4x"]
+[ext_resource type="Texture2D" uid="uid://cpi065do4rjl8" path="res://assets/graphics/pirate_items.jpg" id="1_kts8u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kw4c"]
+atlas = ExtResource("1_kts8u")
+region = Rect2(1310, 831, 160, 158)
+
+[resource]
+script = ExtResource("1_jrt4x")
+id = "rum"
+type = 0
+target = 1
+cost = 0
+one_coin_value = 4
+two_coin_value = 7
+three_coin_value = 12
+icon = SubResource("AtlasTexture_8kw4c")
+tooltip_text = "Rum. A pirates favorite drink.
+
+But why is it always gone???"

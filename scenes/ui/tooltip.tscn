@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvd0txxs8wdyp"]
+
+[ext_resource type="Theme" uid="uid://b3eypke120vg0" path="res://custom_resources/main_theme.tres" id="1_0s6ft"]
+[ext_resource type="Texture2D" uid="uid://cpi065do4rjl8" path="res://assets/graphics/pirate_items.jpg" id="2_hbrpg"]
+[ext_resource type="Script" path="res://scenes/ui/tooltip.gd" id="2_uh2h3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csmff"]
+atlas = ExtResource("2_hbrpg")
+region = Rect2(1311, 830, 163, 158)
+
+[node name="Tooltip" type="PanelContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 141.0
+grow_horizontal = 2
+theme = ExtResource("1_0s6ft")
+script = ExtResource("2_uh2h3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TooltipIcon" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+texture = SubResource("AtlasTexture_csmff")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TooltipText" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_0s6ft")
+theme_override_constants/line_separation = 2
+bbcode_enabled = true
+text = "tooltip description
+tooltip description
+tooltip description"
+fit_content = true

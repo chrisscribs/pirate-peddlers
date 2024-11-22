@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=3 format=3 uid="uid://c2vsxi2soqj3n"]
+
+[ext_resource type="Script" path="res://custom_resources/player_stats.gd" id="1_o1xvd"]
+[ext_resource type="Resource" uid="uid://7mryqhao0uab" path="res://cards/starting_deck.tres" id="2_5ijed"]
+
+[resource]
+script = ExtResource("1_o1xvd")
+starting_deck = ExtResource("2_5ijed")
+cards_per_turn = 5
+starting_gold = 0
+max_gold = 999
+starting_modifier = 0
+max_modifier = 999
