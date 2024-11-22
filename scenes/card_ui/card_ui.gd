@@ -26,6 +26,8 @@ var tween: Tween
 var playable := true : set = _set_playable
 var disabled := false
 
+signal reset_card_state
+
 func animate_to_position(new_position: Vector2, duration: float) -> void:
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "global_position", new_position, duration)
@@ -34,9 +36,15 @@ func play() -> void:
 	if not card:
 		return
 	
-	print("Card played successfully.")
-	card.play(targets)
-	queue_free()
+	# Check if any target's current_card_type matches the card's ID
+	for target in targets:
+		if not target.current_placed_cards or card.id == target.current_card_type:
+			card.play([target])
+			queue_free()
+			return
+		if card.id != target.current_card_type:
+			_on_card_drag_or_aim_ended(self)
+
 
 func _ready() -> void:
 	Events.card_aim_started.connect(_on_card_drag_or_aiming_started)
@@ -102,6 +110,7 @@ func _on_card_drag_or_aiming_started(used_card: CardUI) -> void:
 func _on_card_drag_or_aim_ended(_card: CardUI) -> void:
 	disabled = false
 	self.playable = player_stats.can_play_card(card)
+	Events.card_invalid_placement.emit()
 
 func _on_player_stats_changed() -> void:
 	self.playable = player_stats.can_play_card(card)

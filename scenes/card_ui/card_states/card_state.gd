@@ -32,3 +32,6 @@ func on_mouse_entered() -> void:
 
 func on_mouse_exited() -> void:
 	pass
+
+func on_card_invalid_placement() -> void:
+	pass

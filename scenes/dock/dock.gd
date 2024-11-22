@@ -7,6 +7,7 @@ extends Node2D
 @onready var stats_ui = $StatsUI as StatsUI
 
 var current_placed_cards: CardPile
+var current_card_type: String
 
 func set_dock_stats(value: Stats) -> void:
 	stats = value.create_instance()
@@ -35,18 +36,19 @@ func add_card_to_dock(card: Card) -> bool:
 	if not current_placed_cards:
 		current_placed_cards = CardPile.new()
 		
+	# Add the card if the pile is empty or matches the current type
 	if current_placed_cards.empty() or current_placed_cards.get_card(0).id == card.id:
 		current_placed_cards.add_card(card)
-		print("Added card %s to dock pile" % card.id)
-		return true
+		current_card_type = card.id
+		print("Card added to dock. Current card type:", current_card_type) # Update the current card type after adding
 		Events.card_placed_on_dock.emit(card)
+		return true
 	else:
 		print("Cannot add card %s, dock already has %s" % [card.id, current_placed_cards.get_card(0).id])
 		return false
 
 func _on_area_entered(area):
 	arrow.show()
-
 
 func _on_area_exited(area):
 	arrow.hide()

@@ -11,4 +11,5 @@ func execute(targets: Array[Node]) -> void:
 		if not target:
 			continue
 		if target is Dock:
+			print("play")
 			var placed_successfully = target.add_card_to_dock(card)

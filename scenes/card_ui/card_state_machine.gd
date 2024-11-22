@@ -34,6 +34,10 @@ func on_mouse_exited() -> void:
 	if current_state:
 		current_state.on_mouse_exited()
 		
+func on_card_invalid_placement() -> void:
+	if current_state:
+		current_state.on_card_invalid_placement()
+		
 func _on_transition_requested(from: CardState, to: CardState.State) -> void:
 	if from != current_state:
 		return
@@ -47,6 +51,3 @@ func _on_transition_requested(from: CardState, to: CardState.State) -> void:
 	
 	new_state.enter()
 	current_state = new_state
-
-func _on_invalid_placement(card: Card) -> void:
-	_on_transition_requested(current_state, CardState.State.BASE)
