@@ -39,7 +39,7 @@ func play() -> void:
 	
 	# Check if any target's current_card_type matches the card's ID
 	for target in targets:
-		if not target.current_placed_cards or card.id == target.current_card_type:
+		if not target.current_placed_cards or card.id == target.current_card_type or target.current_card_type == "":
 			card.play([target])
 			queue_free()
 			return

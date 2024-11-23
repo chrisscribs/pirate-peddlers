@@ -10,6 +10,7 @@ signal card_invalid_placement(card: Card)
 signal card_tooltip_requested(card: Card)
 signal tooltip_hide_requested
 signal card_placed_on_dock(card: Card)
+signal cards_sold(total_gold)
 
 # Player-related events
 signal player_hand_drawn

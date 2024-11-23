@@ -3,17 +3,18 @@ extends Node2D
 
 @onready var arrow = $Arrow
 @onready var stats_ui = $StatsUI as StatsUI
+@onready var sell_button = $StatsUI/VBoxContainer/SellButton
 
 var current_placed_cards: CardPile
-var current_card_type: String
-var stats: Stats  # Declare without export to avoid multiple calls
+var current_card_type: String = ""
+var stats: Stats  
 
-# Set dock stats and connect signals
 func _ready() -> void:
-	# Ensure that stats is initialized when the dock is ready
 	if stats == null:
 		var stats_instance = Stats.new()  # Create a new Stats instance
 		set_dock_stats(stats_instance)  # Initialize stats via set_dock_stats
+	
+	sell_button.pressed.connect(self.sell_cards_in_dock)
 
 # Set dock stats and connect signals
 func set_dock_stats(value: Stats) -> void:
@@ -102,3 +103,24 @@ func calculate_gold(card: Card) -> void:
 	# Update the gold value in stats and the UI
 	stats.gold = gold
 	stats_ui.update_gold(gold)
+
+func sell_cards_in_dock() -> void:
+	if not current_placed_cards or current_placed_cards.empty():
+		return
+	
+	var total_gold = stats.gold
+	
+	stats.gold += total_gold
+	stats_ui.update_gold(stats.gold)  # Update the UI with the new total gold
+
+	current_placed_cards.empty()
+	current_placed_cards.clear()
+	current_card_type = ""
+	stats_ui.update_card_count(0, "None")
+	stats_ui.update_gold(0)
+	stats_ui.enable_sell_button(false)
+	
+	Events.cards_sold.emit(total_gold)
+	
+	print("Sold cards for ", total_gold, " gold.")
+	

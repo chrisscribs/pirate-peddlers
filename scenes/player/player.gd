@@ -6,6 +6,8 @@ extends Node2D
 @onready var sprite_2d = $Sprite2D
 @onready var player_stats_ui = $PlayerStatsUI
 
+var gold: int = 0
+
 func set_player_stats(value: PlayerStats) -> void:
 	stats = value
 	
@@ -28,4 +30,4 @@ func update_ui() -> void:
 
 func add_gold(gold: int) -> void:
 	stats.earn_gold(gold)
-	update_ui()
+	stats.stats_changed.emit()
