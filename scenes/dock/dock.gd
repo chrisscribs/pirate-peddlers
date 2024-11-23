@@ -1,54 +1,104 @@
 class_name Dock
 extends Node2D
 
-@export var stats: Stats : set = set_dock_stats
-
 @onready var arrow = $Arrow
 @onready var stats_ui = $StatsUI as StatsUI
 
 var current_placed_cards: CardPile
 var current_card_type: String
+var stats: Stats  # Declare without export to avoid multiple calls
 
+# Set dock stats and connect signals
+func _ready() -> void:
+	# Ensure that stats is initialized when the dock is ready
+	if stats == null:
+		var stats_instance = Stats.new()  # Create a new Stats instance
+		set_dock_stats(stats_instance)  # Initialize stats via set_dock_stats
+
+# Set dock stats and connect signals
 func set_dock_stats(value: Stats) -> void:
+	# Ensure value is not null and create an instance of stats
+	if value == null:
+		return
+
+	if stats != null:
+		return
+
 	stats = value.create_instance()
-	
-	if not stats.stats_changed.is_connected(update_stats):
-		stats.stats_changed.connect(update_stats)
-	
+	if not stats:
+		return
+
+	stats.gold = 0  # Initialize gold to 0
+
+	# Connect the stats_changed signal if it's not already connected
+	if not stats.stats_changed.is_connected(_on_stats_changed):
+		stats.stats_changed.connect(_on_stats_changed)
+
 	update_dock()
 
+# Update dock UI
 func update_dock() -> void:
-	if not stats is Stats:
-		return
-	if not is_inside_tree():
-		await ready
-	
-	update_stats()
+	if stats_ui and stats:
+		stats_ui.update_gold(stats.gold)  # Update gold UI
+		stats_ui.update_card_count(0, "None")  # Default to no cards
 
-func update_stats() -> void:
-	stats_ui.update_stats(stats)
+# Handle changes in stats
+func _on_stats_changed(card: Card) -> void:
+	if stats_ui and stats:
+		# Get the card count from the current_placed_cards pile
+		var card_count = current_placed_cards.cards.size() if current_placed_cards else 0
+		# Update the stats UI with the new card count and current card type
+		stats_ui.update_card_count(card_count, card.display_name)
 
-func add_gold(gold: int) -> void:
-	stats.earn_gold(gold)
-
+# Add a card to the dock pile and update the dock
 func add_card_to_dock(card: Card) -> bool:
-	# Initialize the card pile if it's not already created
+	if not card:
+		return false
+
+	# Ensure stats is valid before using it
+	if not stats:
+		return false
+	# Initialize the card pile if it doesn't exist
 	if not current_placed_cards:
 		current_placed_cards = CardPile.new()
-		
-	# Add the card if the pile is empty or matches the current type
+	# Check if the card pile is empty or if the card matches the current pile type
 	if current_placed_cards.empty() or current_placed_cards.get_card(0).id == card.id:
 		current_placed_cards.add_card(card)
 		current_card_type = card.id
-		print("Card added to dock. Current card type:", current_card_type) # Update the current card type after adding
+
+		# Emit event when a card is placed on the dock
 		Events.card_placed_on_dock.emit(card)
+
+		# Recalculate gold based on the card
+		calculate_gold(card)
+
+		# Update stats after card is placed
+		_on_stats_changed(card)
+
+		# Enable/disable sell button based on whether the pile is empty
+		stats_ui.enable_sell_button(not current_placed_cards.empty())
 		return true
 	else:
-		print("Cannot add card %s, dock already has %s" % [card.id, current_placed_cards.get_card(0).id])
 		return false
 
-func _on_area_entered(area):
-	arrow.show()
+# Calculate gold based on card count and thresholds
+func calculate_gold(card: Card) -> void:
+	if not stats:
+		return
 
-func _on_area_exited(area):
-	arrow.hide()
+	# Count how many times the card ID appears in the current pile
+	var card_count = 0
+	for c in current_placed_cards.cards:
+		if c.id == card.id:
+			card_count += 1
+	# Calculate gold based on card count and thresholds
+	var gold = 0
+	if card_count >= card.three_coin_value:
+		gold = 3
+	elif card_count >= card.two_coin_value:
+		gold = 2
+	elif card_count >= card.one_coin_value:
+		gold = 1
+	# Update the gold value in stats and the UI
+	stats.gold = gold
+	stats_ui.update_gold(gold)

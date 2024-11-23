@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://pt4xeocmav51"]
+
+[ext_resource type="Script" path="res://scenes/player/player_stats_ui.gd" id="1_5514u"]
+[ext_resource type="Texture2D" uid="uid://dfxkog0h2kxco" path="res://assets/graphics/coin 2.png" id="2_nn8p8"]
+[ext_resource type="Theme" uid="uid://b3eypke120vg0" path="res://custom_resources/main_theme.tres" id="3_qsbii"]
+[ext_resource type="FontFile" uid="uid://dqupergg0uhxa" path="res://assets/fonts/Pirata_One/PirataOne-Regular.ttf" id="4_2mc5e"]
+[ext_resource type="Texture2D" uid="uid://cpi065do4rjl8" path="res://assets/graphics/pirate_items.jpg" id="5_xjcqw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gix1"]
+atlas = ExtResource("5_xjcqw")
+region = Rect2(71, 190, 159, 159)
+
+[node name="PlayerStatsUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5514u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -12.5
+offset_right = 75.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Gold" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="GoldImage" type="TextureRect" parent="HBoxContainer/Gold"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_nn8p8")
+expand_mode = 3
+
+[node name="PlayerGoldLabel" type="Label" parent="HBoxContainer/Gold"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_qsbii")
+theme_override_fonts/font = ExtResource("4_2mc5e")
+theme_override_font_sizes/font_size = 18
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawPile" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="DrawPileImage" type="TextureRect" parent="HBoxContainer/DrawPile"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_2gix1")
+expand_mode = 3
+
+[node name="DrawPileLabel" type="Label" parent="HBoxContainer/DrawPile"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_qsbii")
+theme_override_fonts/font = ExtResource("4_2mc5e")
+theme_override_font_sizes/font_size = 18
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -12,7 +12,8 @@ const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
 
 @onready var panel = $Panel
 @onready var cost = $Cost
-@onready var icon = $Icon
+@onready var icon = $VBoxContainer/Icon
+@onready var display_name = %DisplayName
 @onready var drop_point_detector = $DropPointDetector
 @onready var card_state_machine = $CardStateMachine
 @onready var targets: Array[Node] = []
@@ -73,6 +74,7 @@ func _set_card(value: Card) -> void:
 		cost.text = str(card.cost)
 		
 	icon.texture = card.icon
+	display_name.text = card.display_name
 	one_coin_value.text = str(card.one_coin_value)
 	two_coin_value.text = str(card.two_coin_value)
 	three_coin_value.text = str(card.three_coin_value)

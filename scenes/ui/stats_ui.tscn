@@ -1,66 +1,90 @@
-[gd_scene load_steps=7 format=3 uid="uid://e6tdfuhgbnfu"]
+[gd_scene load_steps=5 format=3 uid="uid://e6tdfuhgbnfu"]
 
 [ext_resource type="Script" path="res://scenes/ui/stats_ui.gd" id="1_vpq11"]
 [ext_resource type="Theme" uid="uid://b3eypke120vg0" path="res://custom_resources/main_theme.tres" id="2_a3vap"]
 [ext_resource type="Texture2D" uid="uid://dfxkog0h2kxco" path="res://assets/graphics/coin 2.png" id="2_o2dhy"]
 [ext_resource type="FontFile" uid="uid://dqupergg0uhxa" path="res://assets/fonts/Pirata_One/PirataOne-Regular.ttf" id="3_cwcld"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0a8it"]
-load_path = "res://.godot/imported/pirate_items.jpg-0165868caddd8915c2a941cc0f272bfd.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_stsd2"]
-atlas = SubResource("CompressedTexture2D_0a8it")
-region = Rect2(603, 350, 154, 154)
-
-[node name="StatsUI" type="HBoxContainer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -201.0
-offset_right = 201.0
-offset_bottom = 154.0
+[node name="StatsUI" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -780.0
+offset_bottom = -450.0
 grow_horizontal = 2
-theme_override_constants/separation = 100
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_vpq11")
 
-[node name="Gold" type="HBoxContainer" parent="."]
-layout_mode = 2
-theme_override_constants/separation = 10
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 182.0
+offset_bottom = 94.0
 
-[node name="TextureRect" type="TextureRect" parent="Gold"]
+[node name="CardCountLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 30)
 layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_a3vap")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SellButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_a3vap")
+theme_type_variation = &"FlatButton"
+disabled = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SellButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -11
+alignment = 1
+
+[node name="Gold" type="HBoxContainer" parent="VBoxContainer/SellButton/VBoxContainer"]
+custom_minimum_size = Vector2(180, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="GoldImage" type="TextureRect" parent="VBoxContainer/SellButton/VBoxContainer/Gold"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
 texture = ExtResource("2_o2dhy")
-expand_mode = 2
+expand_mode = 3
 
-[node name="GoldLabel" type="Label" parent="Gold"]
+[node name="GoldLabel" type="Label" parent="VBoxContainer/SellButton/VBoxContainer/Gold"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("2_a3vap")
 theme_override_fonts/font = ExtResource("3_cwcld")
-theme_override_font_sizes/font_size = 120
-text = "0
-"
+theme_override_font_sizes/font_size = 18
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Modifier" type="HBoxContainer" parent="."]
+[node name="SellButtonLabel" type="Label" parent="VBoxContainer/SellButton/VBoxContainer"]
+custom_minimum_size = Vector2(180, 25)
 layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="ModifierImage" type="TextureRect" parent="Modifier"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("2_a3vap")
-texture = SubResource("AtlasTexture_stsd2")
-
-[node name="ModifierLabel" type="Label" parent="Modifier"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("2_a3vap")
-theme_override_fonts/font = ExtResource("3_cwcld")
-theme_override_font_sizes/font_size = 120
-text = "+6
-"
+theme_override_font_sizes/font_size = 12
+text = "Sell"
 horizontal_alignment = 1
 vertical_alignment = 1

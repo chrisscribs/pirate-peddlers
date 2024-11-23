@@ -10,6 +10,7 @@ region = Rect2(777, 32, 158, 151)
 [resource]
 script = ExtResource("1_56re2")
 id = "rusty_cutlass"
+display_name = "Rusty Cutlass"
 type = 0
 target = 1
 cost = 0

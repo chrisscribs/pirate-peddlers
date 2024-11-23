@@ -10,6 +10,7 @@ region = Rect2(1310, 831, 160, 158)
 [resource]
 script = ExtResource("1_jrt4x")
 id = "rum"
+display_name = "Rum"
 type = 0
 target = 1
 cost = 0

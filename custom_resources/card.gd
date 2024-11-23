@@ -6,6 +6,7 @@ enum Target {SELF, SINGLE_ITEM, ALL}
 
 @export_group("Card Attributes")
 @export var id: String
+@export var display_name: String
 @export var type: Type
 @export var target: Target
 @export var cost: int = 0

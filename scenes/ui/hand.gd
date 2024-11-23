@@ -11,6 +11,7 @@ func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
 
 func add_card(card: Card) -> void:
+	print(card.display_name)
 	var new_card_ui := card_ui.instantiate()
 	add_child(new_card_ui)
 	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
